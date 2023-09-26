@@ -3,6 +3,8 @@ layout: post
 title: First Practice
 ---
 
+Basic Vacuum Cleaner
+
 # Basic Vacuum Cleaner
 
 For the first practice, I have to program the behavior of a basic vacuum cleaner.
