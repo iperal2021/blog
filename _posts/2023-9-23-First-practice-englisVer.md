@@ -223,7 +223,7 @@ The final turns are as follows:
 | 9         | Left         | 4       |
 
 Certainly, here is your text translated into English while preserving the Markdown format:
-
+---
 #### TESTING
 
 Once we have the obstacle-detecting laser and the random turn function, it's time to test everything together since until now, I have only tested each part separately. It is now that syntactic and logical errors start to appear.
@@ -243,7 +243,6 @@ This program, without the spiral movement, can produce good results after a long
 ![test_without_spiral2](../images/test_WITHOUT_spiral.png)
 
 It should be noted that if it enters the middle-left room at any time, the time the robot spends there can be very high.
-
 ---
 #### FIXING ERRORS
 
@@ -310,4 +309,4 @@ As we can see in this version, which I tried to eliminate unnecessary loops that
 
 [Video 2: Version with While Loop](https://github.com/iperal2021/blog/assets/113594702/0802bc5b-5b2c-4751-bdf4-f2ff83f94ed1)
 
-In this version, a `while` loop is used, but the turns are more accurate and faster, resulting in greater ground coverage.
+In this version, a `while` loop is used, but the turns are more accurate and faster, resulting in greater ground coverage and a faster movement which enables the option to scape from narrow paths or rooms.
