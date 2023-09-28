@@ -294,6 +294,13 @@ De esta manera deberia evitarme el uso del bucle ya mencionado que cora la ejecu
 
 A continuación dos videos de la ejecución del programa con esta versión y la anterior.
 
-![v5](../videos/sin_whiletrue.mp4)
 
-![v4](../videos/con_whiletrue.mp4)
+
+https://github.com/iperal2021/blog/assets/113594702/e26f310b-3b4e-49d8-969b-b198cbb760e1
+
+Como odemos ver en esta versión, la cual intenté desacerme de bucles innecesarios que pararan la ejecución. Los giros no son exactos por lo que tiene menor superficie recorrida.
+
+
+https://github.com/iperal2021/blog/assets/113594702/0802bc5b-5b2c-4751-bdf4-f2ff83f94ed1
+
+En esta versión se ha usado el bucle *while* pero los giros son más exactos y rapidos por lo que la superficie recorrida es mayor.
