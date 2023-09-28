@@ -313,3 +313,5 @@ As we can see in this version, which I tried to eliminate unnecessary loops that
 In this version, a `while` loop is used, but the turns are more accurate and faster, resulting in greater ground coverage and a faster movement which enables the option to scape from narrow paths or rooms.
 
 > [Code of this version.](https://github.com/iperal2021/blog/blob/master/practica_1/vacuum_cleaner_v4.py)
+
+All the changes of this two versions and the other ones can be consulted in the **[repository](https://github.com/iperal2021/blog/tree/master/practica_1)** which hold this **[blog](https://github.com/iperal2021/blog)**.
