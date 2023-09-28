@@ -18,9 +18,9 @@ html {
 }
 
 body {
-	background: $icecold;
+	background: $white;
   font: 18px/1.4 $helvetica;
-  color: $gray;
+  color: $icecold;
 }
 
 .container {
@@ -69,7 +69,7 @@ p {
 }
 
 a {
-  color: $black;
+  color: $blue;
   text-decoration: none;
 	cursor: pointer;
   &:hover, &:active {
@@ -114,7 +114,7 @@ img {
 .gmnoprint img {
   max-width: none;
 }
-
+git config pull.rebase false
 .date {
   font-style: italic;
   color: $gray;
