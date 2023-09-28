@@ -260,3 +260,40 @@ Una vez arreglado el problema con la espiral y teniendo ya el resto de estados, 
 Debido al movimiento semi-aleatorio, cada vez que se inicia el programa si medimos en un mismo tiempo, siempre obtendremos un patrón diferente al anterior, obteniendo a veces un resultado mejor.
 
 La mejor implementación hasta ahora era iniciar con el movimiento espiral y una vez detectado un obstaculo seguir un bucle de movimiento hacia delante seguido de un giro aleatorio cada vez que se detecte un obstaculo a la distancia indicada, pero es necesario añadir una forma de volver al movimiento espiral y que este sea eficiente.
+
+Para realizar el giro anterior mente usaba una función con un bucle *while*, pero debido a que no es un buena practica de programación lo modifiqué de la siguiente manera, reduciendo el numero de funciones usadas:
+```python
+ if STATE == 1:
+        
+        laser_data = HAL.getLaserData()
+        
+        HAL.setV(0)  # Detener el movimiento lineal
+    
+        number = random.randint(0, 9)
+        if number % 2 == 0:
+            HAL.setW(ANGULAR_VEL_R)  # Giro a la derecha
+        else:
+            HAL.setW(ANGULAR_VEL_L)  # Giro a la izquierda
+        global time_to_turn
+        if number == 0 or number == 9:
+            time_to_turn = 10
+        elif number == 1 or number == 8:
+            time_to_turn = 9
+        elif number == 2 or number == 7:
+            time_to_turn = 8
+        elif number == 3 or number == 6:
+            time_to_turn = 7
+        else:
+            time_to_turn = 6
+        if (time.time() - Initial_time) >= time_to_turn:
+            Initial_time = time.time()
+            STATE = 2
+```
+
+De esta manera deberia evitarme el uso del bucle ya mencionado que cora la ejecución del programa. Por desgracia el funcionamiento final no es el esperado, pues el tiempo que tarda en cubrir la misma superficie es mayor que en la anterior versión del programa.
+
+A continuación dos videos de la ejecución del programa con esta versión y la anterior.
+
+![v5](../videos/sin_whiletrue.mp4)
+
+![v4](../videos/con_whiletrue.mp4)
