@@ -306,7 +306,10 @@ Below are two videos of the program's execution with this version and the previo
 [Video 1: Version without Loop](https://github.com/iperal2021/blog/assets/113594702/e26f310b-3b4e-49d8-969b-b198cbb760e1)
 
 As we can see in this version, which I tried to eliminate unnecessary loops that would stop the execution, the turns are not exact, resulting in less ground covered.
+> [Code of this version.](https://github.com/iperal2021/blog/blob/master/practica_1/vacuum_cleaner_v5.py)
 
 [Video 2: Version with While Loop](https://github.com/iperal2021/blog/assets/113594702/0802bc5b-5b2c-4751-bdf4-f2ff83f94ed1)
 
 In this version, a `while` loop is used, but the turns are more accurate and faster, resulting in greater ground coverage and a faster movement which enables the option to scape from narrow paths or rooms.
+
+> [Code of this version.](https://github.com/iperal2021/blog/blob/master/practica_1/vacuum_cleaner_v4.py)
