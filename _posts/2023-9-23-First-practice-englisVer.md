@@ -186,6 +186,7 @@ def random_turn():
 ```
 
 > Version 2.0
+
 ```python
 number = random.randint(0, 9)
 if number % 2 == 0:
