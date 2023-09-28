@@ -1,6 +1,3 @@
-Sure, here is your text translated into English while preserving the Markdown format:
-
-```markdown
 ---
 layout: post
 title: First Practice
@@ -56,7 +53,6 @@ The conclusions I draw are as follows:
 ## Implementation kickoff
 
 ### Spiral
-------
 
 I set aside working with the laser while I try to create the spiral movement. To achieve this movement, I need to make the necessary calculations to optimize the linear and angular velocities.
 
@@ -112,7 +108,7 @@ def my_sleep(seconds, condition):
         elif elapsed_time < seconds and condition:
             break
 ```
-
+---
 #### Laser
 
 Once I have achieved spiral movement, I need to start working with the laser to detect obstacles and stop the robot's movement to initiate the next state.
@@ -147,7 +143,7 @@ def parse_laser_data(laser_data):
             laser += [(dist, angle)]
     return laser
 ```
-
+---
 #### Random Turn
 
 For the turn, I thought about implementing an algorithm that chooses the direction and duration of the turn randomly. This implementation went through two different versions, with the second one being visually clearer.
@@ -225,10 +221,9 @@ The final turns are as follows:
 | 7         | Left         | 2.5     |
 | 8         | Right        | 3       |
 | 9         | Left         | 4       |
-```
+
 Certainly, here is your text translated into English while preserving the Markdown format:
 
-```markdown
 #### TESTING
 
 Once we have the obstacle-detecting laser and the random turn function, it's time to test everything together since until now, I have only tested each part separately. It is now that syntactic and logical errors start to appear.
