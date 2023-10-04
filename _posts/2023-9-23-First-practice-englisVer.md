@@ -223,7 +223,6 @@ The final turns are as follows:
 | 8         | Right        | 3       |
 | 9         | Left         | 4       |
 
-Certainly, here is your text translated into English while preserving the Markdown format:
 ---
 #### TESTING
 
