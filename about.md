@@ -4,7 +4,7 @@ title: About
 permalink: /about/
 ---
 
-Some information about you!
+Hi! I'm Iker Peral, student at the University Rey Juan Carlos
 
 ### More Information
 
