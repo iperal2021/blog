@@ -198,9 +198,21 @@ _, linear_vel = PID(Kd_l, Kp_l, Ki_l, max_linear_vel)
 
 Another important change made is in the cropping of the image, which has been increased in the lower part, in this way we only process the upper part of the line that must be followed, making the program more reactive. In previous versions I only cut the upper part of the image, but not the lower, because of this the centroid was very low, making it less reactive.
 
-* One of the best results I could achieve:
+* One of the best results I could achieve and record:
 
 ![video_final](../images/follow_line_good.gif)
+
+The best time I ever made in the simple circuit was 65 seconds.
+
+|VARIABLE|VALUE|
+|:---:|:---:|
+|max linear vel|9.0|
+|min linear vel|3.0|
+|angular vel|[-1,1]|
+|kp_angular|0.0061|
+|kd_angular|0.026505|
+|kp_linear|0.02|
+|kd_linear|0.0000002|
 
 This code is version 2.5 of the program: [follow_line_v2_5.py](https://github.com/iperal2021/blog/blob/master/practica_2/follow_line_v2_5.py)
 
@@ -213,3 +225,5 @@ An aspect that I have not addressed either is that the camera is not in the cent
 * ####  Once the *PID* is adjusted to achieve the highest possible precision and speed, no matter how well it works, once the execution is paused and the program is resumed or re-launched, the result will vary.
 
 After many tests in different circuits with the most general PID I have reached this conclusion. Although I do not know the exact reason why this happens, I assume that it is due to several factors beyond my control, such as the speed of the internet connection or the traffic of the website itself.
+
+To achieve better precision it is possible by reducing the maximum speed that can be achieved, by reducing the value of **max_linear_vel** variable.
