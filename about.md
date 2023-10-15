@@ -4,11 +4,11 @@ title: About
 permalink: /about/
 ---
 
-Hi! I'm Iker Peral, student at the University Rey Juan Carlos
+:smile: Hi! I'm Iker Peral 
 
-### More Information
+:pencil: Student at the University Rey Juan Carlos
 
-A place to include any other types of information that you'd like to include about yourself.
+:computer: This blog aims to house the memory of the practices for the subject of mobile robotics
 
 ### Contact me
 
