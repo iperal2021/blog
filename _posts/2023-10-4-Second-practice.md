@@ -18,8 +18,8 @@ Before starting to program I must set some objectives so that little by little t
 3. *PID* for angular velocity.
 4. *PID* for linear velocity.
 5. (Possible improvement) Split the image in two: whit two centroids calculate linear and angular errors.
- 
-## *PID*
+
+## PID
 
 A **PID** controller (proportional, integral and derivative controller) is a control mechanism that, through a feedback loop, allows the regulation of speed, temperature, pressure and flow among other variables of a process in general. The **PID** controller calculates the difference between our actual variable versus the desired variable.
 
@@ -36,20 +36,20 @@ Since the line to follow is red, I must create a filter that only detects that c
 ```python
 image = HAL.getImage()
     
-    boundaries = [
-	([17, 15, 100], [50, 56, 255])]
+boundaries = [
+([17, 15, 100], [50, 56, 255])]
 
-    for (lower, upper) in boundaries:
-      	# create NumPy arrays from the boundaries
-      	lower = np.array(lower, dtype = "uint8")
-      	upper = np.array(upper, dtype = "uint8")
-      	# find the colors within the specified boundaries and apply
-      	# the mask
-      	mask = cv2.inRange(image, lower, upper)
-      	output = cv2.bitwise_and(image, image, mask = mask)
-      	# show the images
-      	GUI.showImage(output)
-      	cv2.waitKey(0)
+for (lower, upper) in boundaries:
+    # create NumPy arrays from the boundaries
+    lower = np.array(lower, dtype = "uint8")
+    upper = np.array(upper, dtype = "uint8")
+    # find the colors within the specified boundaries and apply
+    # the mask
+    mask = cv2.inRange(image, lower, upper)
+    output = cv2.bitwise_and(image, image, mask = mask)
+    # show the images
+    GUI.showImage(output)
+    cv2.waitKey(0)
 ```
 
 ![filtro_rojo](../images/red_filter.png)
@@ -88,9 +88,9 @@ To achieve this, I follow the tutorials and recomendations given to us in the do
 
 [OpenCV en inglés](https://stackoverflow.com/questions/10469235/opencv-apply-mask-to-a-color-image)
 
-To improve once more the processing of the image, I change the code used in the mask to get the red line. 
+To improve once more the processing of the image, I change the code used in the mask to get the red line.
 
-## 
+## Implementation
 
 The first step to start once I have the processed image, is to implement the *P* controller to adjust the angular speed to maintain the car with straight movement in staight line an to take the curves without oscillation.
 
@@ -130,7 +130,7 @@ I tried to add the *I* controller but no matter the value of the *Ki* variable, 
 
 This code is version 1 of the program: [follow_line_v1.py](https://github.com/iperal2021/blog/blob/master/practica_2/follow_line_v1.py)
 
-## 
+## Improving the code
 
 For now the speed has been quite low if I want the car to travel the entire circuit. To increase this speed I am going to add the controller for the linear speed.
 
@@ -205,7 +205,7 @@ This code is version 2.5 of the program: [follow_line_v2_5.py](https://github.co
 
 ## Final version and conclusion
 
-The final version discards the idea of ​​separating the image in two and working with two centroids. Maybe doing it that way could make the *PID* more precise but the actual code whit enough time can be dajusted to be fast and precise. 
+The final version discards the idea of ​​separating the image in two and working with two centroids. Maybe doing it that way could make the *PID* more precise but the actual code whit enough time can be dajusted to be fast and precise.
 
 An aspect that I have not addressed either is that the camera is not in the center of the car. This can be fixed with a simple calculation, but for some reason it makes the *PID* adjustment more imprecise.Which brings us to a very important conclusion about the *PID* that must be taken into account:
 

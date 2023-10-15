@@ -5,6 +5,8 @@ title: Welcome!
 
 Welcome!
 
+![urjc_logo](../images/logo_urjc.jpg)
+
 I'm Iker Peral del Pino, student of the degree of *Ingenieria en Robótica Software* at the [University Rey Juan Carlos](https://www.urjc.es/) 
 
 This blog has the purpose of showing the progress made in each of the practices of the subject *Robótica Móvil*.

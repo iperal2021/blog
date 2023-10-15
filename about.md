@@ -4,7 +4,7 @@ title: About
 permalink: /about/
 ---
 
-:smile: Hi! I'm Iker Peral 
+:smile: Hi! I'm Iker Peral
 
 :pencil: Student at the University Rey Juan Carlos
 
