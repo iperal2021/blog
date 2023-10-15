@@ -78,7 +78,8 @@ A change regarding the original *centroid* code is the if-else statement, wich a
 ![filtro_rojo](../images/centroid.png)
 
 To further improve the reactivity of the program, we can leave out the upper part of the image because nothing relevant to the execution of the program is shown. Therefore, using openCV once again we crop it before working with it.
-> corte = image_hsv[250:450, 0:image_hsv.shape[1]]
+
+* corte = image_hsv[250:450, 0:image_hsv.shape[1]]
 
 ![imagen_corte](../images/filtroRecortado.png)
 
@@ -175,8 +176,8 @@ For this version there are several points to highlight, such as the reuse of the
 * *PID* function:
   
 ```python
-# *PID* function from the previous version
-    def *PID*(KD, KP, KI, max_vel_linear):
+# PID function from the previous version
+    def PID(KD, KP, KI, max_vel_linear):
   
         global sum_error
         derivative_term = KD * ((error - prev_error))
@@ -191,11 +192,11 @@ For this version there are several points to highlight, such as the reuse of the
         return angular_vel, linear_vel
 
 # Setting the speeds 
-angular_vel, _ = *PID*(Kd_a, Kp_a, Ki_a, 0)
-_, linear_vel = *PID*(Kd_l, Kp_l, Ki_l, max_linear_vel)
+angular_vel, _ = PID(Kd_a, Kp_a, Ki_a, 0)
+_, linear_vel = PID(Kd_l, Kp_l, Ki_l, max_linear_vel)
 ```
 
-Another important change made is in the cropping of the image, which has been increased in the lower part, in this way we only process the upper part of the line that must be followed, making the program more reactive.
+Another important change made is in the cropping of the image, which has been increased in the lower part, in this way we only process the upper part of the line that must be followed, making the program more reactive. In previous versions I only cut the upper part of the image, but not the lower, because of this the centroid was very low, making it less reactive.
 
 * One of the best results I could achieve:
 
