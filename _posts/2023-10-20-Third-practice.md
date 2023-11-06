@@ -162,3 +162,5 @@ Now the results are more satisfactory because the errors mentioned above have di
 In the next video it can be seen that th car reaches the waypoints and is able to avoid all the obstacles with the only exception that somtimes this avoidance is made too close to it.
 
 ![vueltaEntera_bueno](../images/good_lapVFF.gif)
+
+> Code used in the video: **[Obstacle Avoidance](https://github.com/iperal2021/blog/blob/master/practica_3/obstacle_avoidance_v2.py)**
