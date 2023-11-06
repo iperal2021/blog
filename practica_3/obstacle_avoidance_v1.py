@@ -53,28 +53,6 @@ def get_repulsive_force(parse_laser):
     laser_mean = np.mean(laser_vectorized, axis=0)
     return laser_mean
 
-def get_forces():
-    
-    robotx = HAL.getPose3d().x
-    roboty = HAL.getPose3d().y
-    robott = HAL.getPose3d().yaw
-
-    
-    target_abs_x = currentTarget.getPose().x
-    target_abs_y = currentTarget.getPose().y
-    absolute_taget = target_abs_x, target_abs_y
-    
-    target_rel_x, target_rel_y = absolute2relative(absolute_taget[0], absolute_taget[1], robotx, roboty, robott)
-
-    # Car direction  (green line in the image below)
-    carForce = [max(min(target_rel_x, 3.5), -3.5), max(min(target_rel_y, 3.2), -3.2)]
-    # Obstacles direction (red line in the image below)
-    obsForce = [get_repulsive_force(laser)[0]*x_var, get_repulsive_force(laser)[1]*y_var]
-    # Average direction (black line in the image below)
-    avgForce = [(carForce[0]+obsForce[0])* vel_adj, (carForce[1] + obsForce[1])]
-    
-    return carForce, obsForce, avgForce, target_rel_x, target_rel_y 
-
 while True:
     # Enter iterative code!
     image = HAL.getImage()
@@ -88,23 +66,39 @@ while True:
     GUI.map.targety = currentTarget.getPose().y
 
     carForce, obsForce, avgForce, target_rel_x, target_rel_y  = get_forces()
-    
-    arctan = math.atan(avgForce[1]/avgForce[0])
+
+    target_rel_x, target_rel_y = absolute2relative(absolute_taget[0], absolute_taget[1], robotx, roboty, robott)
 
     print("Velocidad angular:", arctan)
     print("velocidad linear: ", abs(avgForce[0]))
  
     relative_target = target_rel_x, target_rel_y
+    # Car direction  (green line in the image below)
+    carForce = [max(min(target_rel_x, 3.5), -3.5), max(min(target_rel_y, 3.2), -3.2)]
+    # Obstacles direction (red line in the image below)
+    obsForce = [get_repulsive_force(laser)[0]*x_var, get_repulsive_force(laser)[1]*y_var]
+    # Average direction (black line in the image below)
+    avgForce = [(carForce[0]+obsForce[0])* vel_adj, (carForce[1] + obsForce[1])]
 
+    #distance2objetive = distance(relative_target[0], relative_target[1])
+
+    arctan = math.atan(avgForce[1]/avgForce[0])
+
+    print("Tangente:", arctan)
+    #print("Distancia al punto", distance2objetive)
+    print("velocidad linear: ", abs(avgForce[0]))
+    
+>>>>>>> d0c4c1511306db4ea56823320a4813394b0ac8ba
     GUI.showLocalTarget(relative_target)
     GUI.showForces(carForce, obsForce, avgForce)
 
-    if (relative_target[0] < 1.3 and relative_target[1] < 1.3):
+    if (target_rel_x < 1.3 and target_rel_y < 1.3):
         currentTarget.setReached(True)
   
-    distance_to_obstacle = min([dist for dist, angle in laser])
+    #distance_to_obstacle = min([dist for dist, angle in laser])
     
-    HAL.setW(arctan*1.2)
-    HAL.setV(abs(avgForce[0])+0.5)
+    HAL.setW(arctan)
+    HAL.setV(abs(avgForce[0]))
 
-xz
+    GUI.showImage(image)
+>>>>>>> d0c4c1511306db4ea56823320a4813394b0ac8ba
