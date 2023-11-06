@@ -56,8 +56,6 @@ def get_repulsive_force(parse_laser):
 while True:
     # Enter iterative code!
     image = HAL.getImage()
-    GUI.showImage(image)
-    
     laser_data = HAL.getLaserData()
     laser = parse_laser_data(laser_data)
 
@@ -65,14 +63,19 @@ while True:
     GUI.map.targetx = currentTarget.getPose().x
     GUI.map.targety = currentTarget.getPose().y
 
-    carForce, obsForce, avgForce, target_rel_x, target_rel_y  = get_forces()
+    target_abs_x = currentTarget.getPose().x
+    target_abs_y = currentTarget.getPose().y
 
+    robotx = HAL.getPose3d().x
+    roboty = HAL.getPose3d().y
+    robott = HAL.getPose3d().yaw
+
+    absolute_taget = target_abs_x, target_abs_y
+    
     target_rel_x, target_rel_y = absolute2relative(absolute_taget[0], absolute_taget[1], robotx, roboty, robott)
 
-    print("Velocidad angular:", arctan)
-    print("velocidad linear: ", abs(avgForce[0]))
- 
     relative_target = target_rel_x, target_rel_y
+
     # Car direction  (green line in the image below)
     carForce = [max(min(target_rel_x, 3.5), -3.5), max(min(target_rel_y, 3.2), -3.2)]
     # Obstacles direction (red line in the image below)
@@ -88,8 +91,8 @@ while True:
     #print("Distancia al punto", distance2objetive)
     print("velocidad linear: ", abs(avgForce[0]))
     
->>>>>>> d0c4c1511306db4ea56823320a4813394b0ac8ba
     GUI.showLocalTarget(relative_target)
+
     GUI.showForces(carForce, obsForce, avgForce)
 
     if (target_rel_x < 1.3 and target_rel_y < 1.3):
@@ -101,4 +104,3 @@ while True:
     HAL.setV(abs(avgForce[0]))
 
     GUI.showImage(image)
->>>>>>> d0c4c1511306db4ea56823320a4813394b0ac8ba
