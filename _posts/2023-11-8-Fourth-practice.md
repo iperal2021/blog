@@ -5,16 +5,22 @@ title: Fourth Practice
 
 # Global Navigation
 
-For this exercise I hava to implement a autonomous navigation using a ***Gradient Path Planning System*** (GPP) algorithm. Global navigation through GPP, consists of:
+For this exercise I hava to implement a autonomous navigation using a ***Gradient Path Planning System*** (**GPP**) algorithm. Global navigation through *GPP*, consists of:
+<center>
+    <img src="../images/global_navigation_teaser.png" width="400" height="200">
+</center>
 
-Selected a destination, the GPP algorithm is responsible for finding the shortest path to it, avoiding, in the case of this practice, everything that is not road. Once the path has been selected, the logic necessary to follow this path and reach the objective must be implemented in the robot. With this, it is possible for the robot to go to the marked destination autonomously and following the shortest path.
+Selected a destination, the *GPP* algorithm is responsible for finding the shortest path to it, avoiding, in the case of this practice, everything that is not road. Once the path has been selected, the logic necessary to follow this path and reach the objective must be implemented in the robot. With this, it is possible for the robot to go to the marked destination autonomously and following the shortest path.
 
 In robotics, the word "motion planning" refers to the process of identifying a series of workable configurations that move a robot from one location to another. Motion planning algorithms are used in a wide range of contexts, including the study of biological molecules, industrial manipulators, mobile robots, artificial intelligence, and animations.
 
 There are primarily two ways to do the task: Sampling-Based Path Planning and Gradient Path Planning
 
-Gradient Path Planning
-Gradient Path Planning is one such motion planning technique. Potential fields are the foundation of GPP's operation. The target serves as a potential well and the path's obstructions as a potential wall for the path planner. All possible walls and wells are combined to create a road that slopes downward. The robot proceeds along that route.
+Gradient Path Planning is one such motion planning technique. Potential fields are the foundation of *GPP's* operation. The target serves as a potential well and the path's obstructions as a potential wall for the path planner. All possible walls and wells are combined to create a road that slopes downward. The robot proceeds along that route.
+
+<center>
+    <img src="../images/finalGrid.png" width="400" height="200">
+</center>
 
 ## Different versions
 
@@ -28,140 +34,140 @@ At one point I added an heuristic function, this becouse Is the way we realize t
 
 Some versions of the algorithm:
 
-* First version
+* First version: all the neigbours checked one by one whit a large if-else sentence.
 
 ```python
 if not target_found:
-            next_point = points.get()
-            print(next_point)
-            print("carPose: ", carPose)
-            if (next_point == carPose):
-                print("FIN")
-                target_found = True
-            priority, coords = next_point
-            x,y = coords
-            grid[y, x] = priority
-            print("X: ", x_cord, " Y: ", y_cord)
-            print("Expanded: ",expanded)
-            if x_cord >=  0 and x_cord <= 400 and next_point not in expanded:
-                print("Primer sub-if")
-                if y_cord >=  0 and y_cord <= 400: 
-                    
-                    print("vecinos")
-                    expanded.append(next_point)
-                    if (map_array[x][y+1] != 0):
-                        print("1 ", map_array[x][y+1])
-                        grid[y+1][x] = priority+1
-                        points.put((priority+1, [x, y+1]))
-                    elif ( map_array[x-1][y] == 0):
-                          grid[y+1][x] = priority+10      
-                        
-                    if (map_array[x][y-1] != 0):
-                        print("2", map_array[x][y-1])
-                        grid[y-1][x] = priority+1
-                        points.put((priority+1, [x, y-1]))
-                    elif ( map_array[x-1][y] == 0):
-                          grid[y-1][x] = priority+10    
-                        
-                    if (map_array[x+1][y] != 0):
-                        print("3", map_array[x+1][y])
-                        grid[y][x+1] = priority+1
-                        points.put((priority+1, [x+1, y]))
-                    elif ( map_array[x+1][y] == 0):
-                          grid[y][x+1] = priority+10    
-                        
-                    if (map_array[x-1][y] != 0):
-                        print("4", map_array[x-1][y])
-                        grid[y][x-1] = priority+1
-                        points.put((priority+1, [x-1, y]))
-                    elif ( map_array[x-1][y] == 0):
-                          grid[y][x-1] = priority+1000
-                    
-                    for j in range(-1, 1):
-                        for k in range(-1, 1):
-                            if (map_array[x+j][y+k] != 0):
-                                grid[y+j][x+k] = priority+1.4
-                                points.put((priority+1.4, [x+j, y+k]))
-                            elif ( map_array[y+k][x+j] == 0):
-                                grid[y+j][x+k] = priority+1000
+next_point = points.get()
+print(next_point)
+print("carPose: ", carPose)
+if (next_point == carPose):
+print("FIN")
+target_found = True
+priority, coords = next_point
+x,y = coords
+grid[y, x] = priority
+print("X: ", x_cord, " Y: ", y_cord)
+print("Expanded: ",expanded)
+if x_cord >=  0 and x_cord <= 400 and next_point not in expanded:
+print("Primer sub-if")
+if y_cord >=  0 and y_cord <= 400: 
+    
+    print("vecinos")
+    expanded.append(next_point)
+    if (map_array[x][y+1] != 0):
+        print("1 ", map_array[x][y+1])
+        grid[y+1][x] = priority+1
+        points.put((priority+1, [x, y+1]))
+    elif ( map_array[x-1][y] == 0):
+            grid[y+1][x] = priority+10      
+        
+    if (map_array[x][y-1] != 0):
+        print("2", map_array[x][y-1])
+        grid[y-1][x] = priority+1
+        points.put((priority+1, [x, y-1]))
+    elif ( map_array[x-1][y] == 0):
+            grid[y-1][x] = priority+10    
+        
+    if (map_array[x+1][y] != 0):
+        print("3", map_array[x+1][y])
+        grid[y][x+1] = priority+1
+        points.put((priority+1, [x+1, y]))
+    elif ( map_array[x+1][y] == 0):
+            grid[y][x+1] = priority+10    
+        
+    if (map_array[x-1][y] != 0):
+        print("4", map_array[x-1][y])
+        grid[y][x-1] = priority+1
+        points.put((priority+1, [x-1, y]))
+    elif ( map_array[x-1][y] == 0):
+            grid[y][x-1] = priority+1000
+    
+    for j in range(-1, 1):
+        for k in range(-1, 1):
+            if (map_array[x+j][y+k] != 0):
+                grid[y+j][x+k] = priority+1.4
+                points.put((priority+1.4, [x+j, y+k]))
+            elif ( map_array[y+k][x+j] == 0):
+                grid[y+j][x+k] = priority+1000
                
     GUI.showNumpy(grid)
 ```
 
-* Third version:
+* Third version: I reduced the lines used and changed a bit the algorithm
 
 ```python
 if coords not in expanded:
-            expanded.append(coords)
-            print("X: ", coords[0], "Y: ", coords[1])
-            directions = [(0, 1), (0, -1), (1, 0), (-1, 0)]
-            for dx, dy in directions:
-                nx, ny = x + dx, y + dy
-                if 0 <= nx < len(map_array) and 0 <= ny < len(map_array[0]):
-                    if map_array[nx][ny] != 0:
-                        grid[ny][nx] = priority + 1
-                        print(grid)
-                        points.put((priority + 1, [nx, ny]))
-                    elif map_array[nx][ny] == 0:
-                        grid[ny][nx] = priority + 10
-                        
-            for j in range(-1, 1):
-                for k in range(-1, 1):
-                    if 0 <= x+j < len(map_array) and 0 <= y+k < len(map_array[0]):
-                        if map_array[x+j][y+k] != 0:
-                            grid[y+j][x+k] = priority+1.4
-                            print(grid)
-                            points.put((priority+1.4, [x+j, y+k]))
-                        elif map_array[x+j][y+k] == 0:
-                            grid[y+j][x+k] = priority+10
+    expanded.append(coords)
+    print("X: ", coords[0], "Y: ", coords[1])
+    directions = [(0, 1), (0, -1), (1, 0), (-1, 0)]
+    for dx, dy in directions:
+        nx, ny = x + dx, y + dy
+        if 0 <= nx < len(map_array) and 0 <= ny < len(map_array[0]):
+            if map_array[nx][ny] != 0:
+                grid[ny][nx] = priority + 1
+                print(grid)
+                points.put((priority + 1, [nx, ny]))
+            elif map_array[nx][ny] == 0:
+                grid[ny][nx] = priority + 10
+                
+    for j in range(-1, 1):
+        for k in range(-1, 1):
+            if 0 <= x+j < len(map_array) and 0 <= y+k < len(map_array[0]):
+                if map_array[x+j][y+k] != 0:
+                    grid[y+j][x+k] = priority+1.4
+                    print(grid)
+                    points.put((priority+1.4, [x+j, y+k]))
+                elif map_array[x+j][y+k] == 0:
+                    grid[y+j][x+k] = priority+10
                             
     
     GUI.showNumpy(normaliced(grid))
 ```
 
-* Fourth version:
+* Fourth version: This version is so similar to the previous one
 
 ```python
 if not target_found:
-        next_point = points.get()
-        priority, coords = next_point
-        x, y = coords
+    next_point = points.get()
+    priority, coords = next_point
+    x, y = coords
 
-        if coords == carPose:
-            print(counter)
-            print("FIN")
-            target_found = True
+    if coords == carPose:
+        print(counter)
+        print("FIN")
+        target_found = True
 
-        if (x,y) not in expanded:
-            counter += 1
-            expanded.add((x, y))
-            print("X: ", coords[0], "Y: ", coords[1])
-            directions = [(0, 1), (0, -1), (1, 0), (-1, 0)]
-            for dx, dy in directions:
-                nx, ny = x + dx, y + dy
-                if 0 <= nx < len(map_array) and 0 <= ny < len(map_array[0]):
-                    if map_array[nx][ny] != 0 and (nx, ny) not in expanded:
-                        heuristic = distance_heuristic((nx, ny), targetPose)
-                        cost = heuristic + priority + 1
-                        grid[ny][nx] = cost
-                        points.put((cost, [nx, ny]))
-                    elif map_array[nx][ny] == 0 and (nx, ny) not in expanded:
-                        grid[ny][nx] = priority + 1000
+    if (x,y) not in expanded:
+        counter += 1
+        expanded.add((x, y))
+        print("X: ", coords[0], "Y: ", coords[1])
+        directions = [(0, 1), (0, -1), (1, 0), (-1, 0)]
+        for dx, dy in directions:
+            nx, ny = x + dx, y + dy
+            if 0 <= nx < len(map_array) and 0 <= ny < len(map_array[0]):
+                if map_array[nx][ny] != 0 and (nx, ny) not in expanded:
+                    heuristic = distance_heuristic((nx, ny), targetPose)
+                    cost = heuristic + priority + 1
+                    grid[ny][nx] = cost
+                    points.put((cost, [nx, ny]))
+                elif map_array[nx][ny] == 0 and (nx, ny) not in expanded:
+                    grid[ny][nx] = priority + 1000
 
-            for j in range(-1, 1):
-                for k in range(-1, 1):
-                    if 0 <= x+j < len(map_array) and 0 <= y+k < len(map_array[0]):
-                        if map_array[x+j][y+k] != 0 and (x+j, y+k) not in expanded:
-                            heuristic = distance_heuristic((x+j, y+k), targetPose)
-                            cost = heuristic + priority + 1.4
-                            grid[y+j][x+k] = cost
+        for j in range(-1, 1):
+            for k in range(-1, 1):
+                if 0 <= x+j < len(map_array) and 0 <= y+k < len(map_array[0]):
+                    if map_array[x+j][y+k] != 0 and (x+j, y+k) not in expanded:
+                        heuristic = distance_heuristic((x+j, y+k), targetPose)
+                        cost = heuristic + priority + 1.4
+                        grid[y+j][x+k] = cost
 
-                            points.put((cost, [x+j, y+k]))
-                        elif map_array[x+j][y+k] == 0 and (x+j, y+k) not in expanded:
-                            grid[y+j][x+k] = priority + 1000
+                        points.put((cost, [x+j, y+k]))
+                    elif map_array[x+j][y+k] == 0 and (x+j, y+k) not in expanded:
+                        grid[y+j][x+k] = priority + 1000
 ```
 
-* Final version:
+* Final version: I reduced again the lines used but also I made it more easy to understand.
 
 ```python
 if (x, y) not in expanded:
@@ -215,4 +221,55 @@ The differents grids that I get along the versions:
 
 ## Actual navigation
 
-Once I succeeded making the gradient I was able to start the navigation. For it I use the obstacle avoidance practice as a template. From that exercise I use the methods absolute2relative and getForces, editing this last one to fit in what I need for the navigation. I only use the atractive force vector, which in a start I created from the car coordinates to the target coordinates, but it not only go through the walls, but also the car run in circles around the map.
+Once I succeeded making the gradient I was able to start the navigation. For it I use the obstacle avoidance practice as a template. From that exercise I use the methods *absolute2relative* and *getForces*, editing this last one to fit in what I need for the navigation. I only use the atractive force vector, which in a start I created from the car coordinates to the target coordinates, but it not only go through the walls, but also the car run in circles around the map.
+
+```python
+def getCarForces(grid, targetPose):
+
+    robotx = HAL.getPose3d().x
+    roboty = HAL.getPose3d().y
+    robott = HAL.getPose3d().yaw
+        
+    target_rel_x, target_rel_y = absolute2relative(targetPose[1], targetPose[0], robotx, roboty, robott)
+    carForce = [target_rel_x, target_rel_y]
+
+    return carForce, target_rel_x, target_rel_y
+[...]
+
+carForce, target_rel_x, target_rel_y = getCarForces(grid, targetPose)
+
+HAL.setV(carForce[0])
+HAL.setW(carForce[1])
+```
+
+This first implementation got a lot of problems due to that the car didn't detect any wall. One of the runs looks like this:
+
+![weird_movement](../images/weird_movement.gif)
+
+I realized that the atractive force had to be between the car and the nearest coordinate with the lowest weight. The resul is this function:
+
+```python
+def getCarForces(grid, targetPose):
+  
+    while not target_reached:
+        carPose = MAP.rowColumn([HAL.getPose3d().x, HAL.getPose3d().y])
+        robotx = HAL.getPose3d().x
+        roboty = HAL.getPose3d().y
+        robott = HAL.getPose3d().yaw
+        
+        weight = 1000
+        for i in range(-1,2):
+            for j in range(-1,2):
+                current_weight = grid[carPose[0] + i][carPose[1] + j]
+                if current_weight < weight and current_weight != 0:
+                    weight = current_weight
+                    
+                    irl_coord = gridToWorld([carPose[0]+i, carPose[1]+j])
+            
+            target_rel_x, target_rel_y = absolute2relative(irl_coord[1], irl_coord[0], robotx, roboty, robott)
+            carForce = [target_rel_x, target_rel_y]
+            
+            HAL.setV(carForce[0])
+            HAL.setW(carForce[1])
+```
+
