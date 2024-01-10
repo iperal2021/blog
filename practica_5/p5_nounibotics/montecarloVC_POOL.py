@@ -9,7 +9,7 @@ from functools import partial
 from itertools import repeat
 
 
-N_PARTICLES = 400
+N_PARTICLES = 200
 N_CPU = 18
 OBSTACLE_VALUE = 0
 LINEAR_VEL = 0.2
@@ -186,7 +186,7 @@ def weights_func(particle, real_laser):
 
 def main():
     gui = GUI()
-     # Create a HAL (robot) object
+    # Create a HAL (robot) object
     robot = HAL()
     # Set a custom initial pose
     robot.pose[0] = 1.1
